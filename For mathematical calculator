@@ -1,0 +1,67 @@
+# ================================
+# COS202 - Mathematical Calculator (MC)
+# olayinka islamiyat olanshile
+# ================================
+
+def calculator():
+    print("=" * 40)
+    print("      MATHEMATICAL CALCULATOR (MC)")
+    print("=" * 40)
+    print("Operations: + , - , * , / , ^ (power), % (modulus)")
+    print("Commands: C = Clear, OFF = Exit")
+    print("=" * 40)
+
+    while True:
+        num1_input = input("\nEnter first number (or C/OFF): ").strip()
+
+        if num1_input.upper() == "OFF":
+            print("\nCalculator turned OFF. Goodbye!")
+            break
+        elif num1_input.upper() == "C":
+            print("Screen cleared. Start again.")
+            continue
+
+        try:
+            num1 = float(num1_input)
+        except ValueError:
+            print("Invalid number. Try again.")
+            continue
+
+        operator = input("Enter operator (+, -, *, /, ^, %): ").strip()
+
+        if operator not in ["+", "-", "*", "/", "^", "%"]:
+            print("Invalid operator. Try again.")
+            continue
+
+        num2_input = input("Enter second number: ").strip()
+        try:
+            num2 = float(num2_input)
+        except ValueError:
+            print("Invalid number. Try again.")
+            continue
+
+        # Perform calculation using selection statements
+        if operator == "+":
+            result = num1 + num2
+        elif operator == "-":
+            result = num1 - num2
+        elif operator == "*":
+            result = num1 * num2
+        elif operator == "/":
+            if num2 == 0:
+                print("Error: Division by zero is not allowed.")
+                continue
+            result = num1 / num2
+        elif operator == "^":
+            result = num1 ** num2
+        elif operator == "%":
+            if num2 == 0:
+                print("Error: Modulus by zero is not allowed.")
+                continue
+            result = num1 % num2
+
+        print(f"\nResult: {num1} {operator} {num2} = {result}")
+
+
+# Run the calculator
+calculator()
