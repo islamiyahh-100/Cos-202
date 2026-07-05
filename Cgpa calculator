@@ -1,0 +1,92 @@
+# ================================
+# COS202 - Personal Pocket CGPA Calculator (PPC)
+# olayinka islamiyat olanshile
+# 5.0 Grading Scale
+# ================================
+
+def grade_to_point(grade):
+    grade = grade.upper().strip()
+    if grade == "A":
+        return 5
+    elif grade == "B":
+        return 4
+    elif grade == "C":
+        return 3
+    elif grade == "D":
+        return 2
+    elif grade == "E":
+        return 1
+    elif grade == "F":
+        return 0
+    else:
+        return None
+
+
+def classify_cgpa(cgpa):
+    if cgpa >= 4.50:
+        return "First Class"
+    elif cgpa >= 3.50:
+        return "Second Class Upper"
+    elif cgpa >= 2.40:
+        return "Second Class Lower"
+    elif cgpa >= 1.50:
+        return "Third Class"
+    elif cgpa >= 1.00:
+        return "Pass"
+    else:
+        return "Withdrawn/Fail"
+
+
+def ppc_calculator():
+    print("=" * 45)
+    print("     PERSONAL POCKET CGPA CALCULATOR (PPC)")
+    print("=" * 45)
+
+    total_units = 0
+    total_points = 0
+    course_count = 0
+
+    while True:
+        print(f"\n--- Course {course_count + 1} ---")
+        course_name = input("Enter course code (or type DONE to finish): ").strip()
+
+        if course_name.upper() == "DONE":
+            break
+
+        try:
+            units = int(input("Enter course units: ").strip())
+        except ValueError:
+            print("Invalid unit value. Try again.")
+            continue
+
+        grade = input("Enter grade (A, B, C, D, E, F): ").strip()
+        point = grade_to_point(grade)
+
+        if point is None:
+            print("Invalid grade entered. Try again.")
+            continue
+
+        course_credit_points = units * point
+        total_units += units
+        total_points += course_credit_points
+        course_count += 1
+
+        print(f"{course_name}: {units} units x {point} point(s) = {course_credit_points} credit points")
+
+    if total_units == 0:
+        print("\nNo courses entered. CGPA cannot be calculated.")
+        return
+
+    cgpa = total_points / total_units
+    classification = classify_cgpa(cgpa)
+
+    print("\n" + "=" * 45)
+    print(f"Total Units: {total_units}")
+    print(f"Total Credit Points: {total_points}")
+    print(f"Your CGPA: {cgpa:.2f}")
+    print(f"Classification: {classification}")
+    print("=" * 45)
+
+
+# Run the PPC
+ppc_calculator()
